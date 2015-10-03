@@ -5,10 +5,23 @@
 <title>Umíme povídat o uprchlícké situaci</title>
 <style type="text/css">
 html, body, #googft-mapCanvas {
-  height: 300px;
+  height: 100%;
   margin: 0;
   padding: 0;
-  width: 500px;
+  width: 100%;
+}
+#googft-legend {
+  background-color:#fff;
+  border:1px solid #000;
+  padding: 1em;
+  margin: 2em;
+  max-width: 60em;
+  font-size: 150%;
+}
+#googft-legend-title {
+  font-size: 250%;
+}
+#googft-legend-text {
 }
 </style>
 
@@ -24,15 +37,13 @@ html, body, #googft-mapCanvas {
       viewport.setAttribute('content', 'initial-scale=1.0, user-scalable=no');
     }
     var mapDiv = document.getElementById('googft-mapCanvas');
-    mapDiv.style.width = isMobile ? '100%' : '500px';
-    mapDiv.style.height = isMobile ? '100%' : '300px';
     var map = new google.maps.Map(mapDiv, {
-      center: new google.maps.LatLng(50.13992977447362, 14.391237421691358),
-      zoom: 11,
+      center: new google.maps.LatLng(50, 16),
+      zoom: 7,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     });
-    map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('googft-legend-open'));
-    map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('googft-legend'));
+    map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(document.getElementById('googft-legend-open'));
+    map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(document.getElementById('googft-legend'));
 
     layer = new google.maps.FusionTablesLayer({
       map: map,
@@ -52,7 +63,6 @@ html, body, #googft-mapCanvas {
       var legend = document.getElementById('googft-legend');
       var legendOpenButton = document.getElementById('googft-legend-open');
       var legendCloseButton = document.getElementById('googft-legend-close');
-      legend.style.display = 'none';
       legendOpenButton.style.display = 'block';
       legendCloseButton.style.display = 'block';
       legendOpenButton.onclick = function() {
@@ -71,7 +81,18 @@ html, body, #googft-mapCanvas {
 </head>
 
 <body>
-<p>Podílíme se na pomoci uprchlíkům v terénu a jsme připraveni o tom doma hovořit. Najděte si na mapě vhodného člověka, ozvěte se mu a pozvěte ho na svou besedu. Můžeme nabídnout vlastní zážitky z místa.</p>
   <div id="googft-mapCanvas"></div>
+  <input id="googft-legend-open" style="display:none" type="button" value="Co to je?"></input>
+  <div id="googft-legend">
+    <p id="googft-legend-title">Umíme povídat o uprchlícké situaci</p>
+    <div id="googft-legend-text">
+      <p>Podílíme se na pomoci uprchlíkům v&nbsp;terénu a jsme připraveni o tom doma hovořit.
+      Najděte si na mapě vhodného člověka, ozvěte se mu a pozvěte ho na svou besedu.
+      Můžeme nabídnout vlastní zážitky z&nbsp;místa.</p>
+      <p>Pokud jste byli na místě a chcete svou zkušenost popsat dalším,
+      <a href="https://docs.google.com/forms/d/1md5fIovOqysySxpHMosLXtOKcssX0TTwEr1rFSda_5A/viewform">vyplňte formulář</a>.</p>
+    </div>
+    <input id="googft-legend-close" style="display:none" type="button" value="Schovat"></input>
+  </div>
 </body>
 </html>
