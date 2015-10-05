@@ -14,12 +14,13 @@ html, body, #googft-mapCanvas {
   background-color:#fff;
   border:1px solid #000;
   padding: 1em;
-  margin: 2em;
-  max-width: 60em;
-  font-size: 150%;
+  max-width: 30%;
+  max-height: 90%;
+  font-size: 1rem;
+  overflow: auto;
 }
 #googft-legend-title {
-  font-size: 250%;
+  font-size: 2rem;
 }
 #googft-legend-text {
 }
@@ -47,8 +48,8 @@ html, body, #googft-mapCanvas {
       { featureType: "transit", elementType: "labels.icon", stylers: [{ visibility: "off" }]}
       ],
     });
-    map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(document.getElementById('googft-legend-open'));
-    map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(document.getElementById('googft-legend'));
+    map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('googft-legend-open'));
+    map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('googft-legend'));
 
     layer = new google.maps.FusionTablesLayer({
       map: map,
