@@ -40,7 +40,12 @@ html, body, #googft-mapCanvas {
     var map = new google.maps.Map(mapDiv, {
       center: new google.maps.LatLng(50, 16),
       zoom: 7,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      streetViewControl: false,
+      styles: [
+      { featureType: "poi", elementType: "labels.icon", stylers: [{ visibility: "off" }]},
+      { featureType: "transit", elementType: "labels.icon", stylers: [{ visibility: "off" }]}
+      ],
     });
     map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(document.getElementById('googft-legend-open'));
     map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(document.getElementById('googft-legend'));
