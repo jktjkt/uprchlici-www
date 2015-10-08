@@ -29,6 +29,62 @@
   </style>
 
   <script src="https://maps.google.com/maps/api/js?sensor=false&amp;v=3"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="./resources/i18next-1.10.1.min.js"></script>
+  <script>
+    var resources = {
+      'cs-CZ': {
+        translation: {
+          'legend': {
+            'title': 'Umíme povídat o uprchlické situaci',
+            'text': 'Podílíme se na pomoci uprchlíkům v terénu a jsme připraveni o tom doma hovořit. '
+              + 'Najděte si na mapě vhodného člověka, ozvěte se mu a pozvěte ho na svou besedu. '
+              + 'Můžeme nabídnout vlastní zážitky z místa.',
+            'addYourself': 'Pokud jste byli na místě a chcete svou zkušenost popsat dalším, přibližte si místo na mapě,'
+              + 'kde bydlíte, a dvojitě na něj klikněte – ideálně tam, kde ještě nikdo jiný není.'
+          },
+          'add': {
+            'title': 'Přidat se?',
+            'question': 'Chcete se přidat do mapy na pozici',
+            'submit': 'Přidat...',
+            'cancel': 'Zrušit'
+          },
+          'search': {
+            'progress': 'Koukám na adresu...',
+            'error': 'Trable s adresou, zkuste to, prosím, jinde.'
+          }
+        }
+      },
+      'en-US': {
+        translation: {
+          'legend': {
+            'title': 'Yes, we can',
+            'text': 'TODO',
+            'addYourself': 'TODO'
+          },
+          'add': {
+            'title': 'Add?',
+            'question': 'Do you want to add yourself into the map on location',
+            'submit': 'Add...',
+            'cancel': 'Cancel'
+          },
+          'search': {
+            'progress': 'Looking for address...',
+            'error': 'ERRORRRR'
+          }
+        }
+      }
+    };
+
+    $(function() {
+      i18n.init({
+        fallbackLng: 'cs-CZ',
+        resStore: resources
+      }, function (err, t) {
+        $("body").i18n();
+      });
+    });
+  </script>
   <script>
     var map;
     var addingMarker;
@@ -112,7 +168,7 @@
       clearMarker();
       questionText.style.display = 'none';
       searchingInfo.style.display = 'none';
-      searchingInfo.innerHTML = '<p>Koukám na adresu...</p>';
+      searchingInfo.innerHTML = '<p>' + i18n.t('search.progress') + '</p>';
       searchingInfo.style.display = 'block';
       promptDialog.style.display = 'block';
 
@@ -131,7 +187,7 @@
             location.href = 'https://docs.google.com/forms/d/1md5fIovOqysySxpHMosLXtOKcssX0TTwEr1rFSda_5A/viewform?entry.360844720=' + event.latLng.lat() + ',' + event.latLng.lng();
           }
         } else {
-          searchingInfo.innerHTML = '<p>Trable s adresou, zkuste to, prosím, jinde.</p><p>' + status + '</p>';
+          searchingInfo.innerHTML = '<p>' + i18n.t('search.error') + '</p><p>' + status + '</p>';
         }
       });
     }
@@ -145,12 +201,14 @@
 
   <input id="googft-legend-open" style="display:none" type="button" value="Co to je?" />
   <div id="googft-legend">
-    <h2>Umíme povídat o uprchlické situaci</h2>
+    <h2 data-i18n="legend.title">Umíme povídat o uprchlické situaci</h2>
     <div id="googft-legend-text">
-      <p>Podílíme se na pomoci uprchlíkům v&nbsp;terénu a jsme připraveni o tom doma hovořit.
-      Najděte si na mapě vhodného člověka, ozvěte se mu a pozvěte ho na svou besedu.
-      Můžeme nabídnout vlastní zážitky z&nbsp;místa.</p>
-      <p>Pokud jste byli na místě a chcete svou zkušenost popsat dalším, přibližte si místo na mapě, kde bydlíte, a dvojitě na něj klikněte &ndash; ideálně tam, kde ještě nikdo jiný není.</p>
+      <p data-i18n="legend.text">
+        Podílíme se na pomoci uprchlíkům v&nbsp;terénu a jsme připraveni o tom doma hovořit.
+        Najděte si na mapě vhodného člověka, ozvěte se mu a pozvěte ho na svou besedu.
+        Můžeme nabídnout vlastní zážitky z&nbsp;místa.
+      </p>
+      <p data-i18n="legend.addYourself"></p>
     </div>
     <input id="googft-legend-close" style="display:none" type="button" value="Schovat" />
   </div>
@@ -158,10 +216,10 @@
   <div id="add-place">
     <div id="add-place-working"></div>
     <div id="add-place-question">
-      <h2>Přidat se?</h2>
-      <p>Chcete se přidat do mapy na pozici <span id="add-place-where"></span>?</p>
-      <input id="add-place-submit" type="button" value="Přidat..." />
-      <input id="add-place-cancel" type="button" value="Zrušit" />
+      <h2 data-i18n="add.title"></h2>
+      <p><span data-i18n="add.question"></span> <span id="add-place-where"></span>?</p>
+      <input id="add-place-submit" type="button" data-i18n="[value]add.submit" />
+      <input id="add-place-cancel" type="button" data-i18n="[value]add.cancel" />
     </div>
   </div>
 </body>
