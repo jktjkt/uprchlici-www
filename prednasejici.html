@@ -52,7 +52,14 @@
           'search': {
             'progress': 'Koukám na adresu...',
             'error': 'Trable s adresou, zkuste to, prosím, jinde.'
-          }
+          },
+          'infobox': {
+            'place': 'Můžu mluvit o ',
+            'hasPhotos': 'Mám fotky, které rád(a) ukážu, protože ilustrují zážitky mé a nebo mé skupiny',
+            'contact': 'Kontakt',
+            'phone': 'Telefon',
+            'email': 'E-mail',
+          },
         }
       },
       'en-US': {
@@ -73,7 +80,14 @@
           'search': {
             'progress': 'Looking up your address...',
             'error': 'Oops, that place looks a bit fishy, you cannot add yourself in there. Try to pick a better one.'
-          }
+          },
+          'infobox': {
+            'place': 'I can speak about ',
+            'hasPhotos': 'I\'ve got some pictures which illustrate my own or my group\'s personal experience',
+            'contact': 'Contact',
+            'phone': 'Phone',
+            'email': 'E-mail',
+          },
         }
       }
     };
@@ -147,6 +161,7 @@
       }
 
       google.maps.event.addListener(map, 'dblclick', addPersonHere);
+      google.maps.event.addListener(layer, 'click', translateInfoWindow);
     }
 
     function clearMarker() {
@@ -194,6 +209,17 @@
           searchingInfo.innerHTML = '<p>' + i18n.t('search.error') + '</p><p>' + status + '</p>';
         }
       });
+    }
+
+    function translateInfoWindow(e) {
+      e.infoWindowHtml = '<div class="googft-info-window"><h1>' + safeHtml(e.row['Jméno'].value) + '</h1>'
+        + '<p>' + i18n.t('infobox.place') + '<b>' + safeHtml(e.row['Kde jste byl(a)?'].value) + '</b>.</p>'
+        + (e.row['Fotky'].value.length ? ('<p>' + safeHtml(i18n.t('infobox.hasPhotos')) + '</p>') : '')
+        + '<p>' + safeHtml(e.row['Další informace či poznámky'].value) + '</p>'
+        + '<h3>' + i18n.t('infobox.contact') + '</h3>'
+        + (e.row['Telefon'].value.length ? '<p>' + i18n.t('infobox.phone') + ': <b>' + safeHtml(e.row['Telefon'].value) + '</b></p>' : '')
+        + '<p>' + i18n.t('infobox.email') + ': <b><a href="' + safeHtml(e.row['E-mail'].value) + '">' + safeHtml(e.row['E-mail'].value) + '</a></b></p>'
+        + '</div>';
     }
 
     function safeHtml(s) {
