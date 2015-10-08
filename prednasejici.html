@@ -172,6 +172,7 @@
       searchingInfo.style.display = 'none';
       searchingInfo.innerHTML = '<p>' + i18n.t('search.progress') + '</p>';
       searchingInfo.style.display = 'block';
+      submitButton.style.display = 'none';
       promptDialog.style.display = 'block';
 
       var geocoder = new google.maps.Geocoder;
@@ -188,6 +189,7 @@
           submitButton.onclick = function () {
             location.href = 'https://docs.google.com/forms/d/1md5fIovOqysySxpHMosLXtOKcssX0TTwEr1rFSda_5A/viewform?entry.360844720=' + event.latLng.lat() + ',' + event.latLng.lng();
           }
+          submitButton.style.display = 'inline';
         } else {
           searchingInfo.innerHTML = '<p>' + i18n.t('search.error') + '</p><p>' + status + '</p>';
         }
@@ -220,9 +222,9 @@
     <div id="add-place-question">
       <h2 data-i18n="add.title"></h2>
       <p><span data-i18n="add.question"></span> <span id="add-place-where"></span>?</p>
-      <input id="add-place-submit" type="button" data-i18n="[value]add.submit" />
-      <input id="add-place-cancel" type="button" data-i18n="[value]add.cancel" />
     </div>
+    <input id="add-place-submit" type="button" data-i18n="[value]add.submit" />
+    <input id="add-place-cancel" type="button" data-i18n="[value]add.cancel" />
   </div>
 </body>
 </html>
