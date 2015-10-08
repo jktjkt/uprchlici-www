@@ -218,7 +218,7 @@
         + '<p>' + safeHtml(e.row['Další informace či poznámky'].value) + '</p>'
         + '<h3>' + i18n.t('infobox.contact') + '</h3>'
         + (e.row['Telefon'].value.length ? '<p>' + i18n.t('infobox.phone') + ': <b>' + safeHtml(e.row['Telefon'].value) + '</b></p>' : '')
-        + '<p>' + i18n.t('infobox.email') + ': <b><a href="' + safeHtml(e.row['E-mail'].value) + '">' + safeHtml(e.row['E-mail'].value) + '</a></b></p>'
+        + '<p>' + i18n.t('infobox.email') + ': <b><a href="mailto:' + safeHtml(e.row['E-mail'].value) + '">' + safeHtml(e.row['E-mail'].value) + '</a></b></p>'
         + '</div>';
     }
 
