@@ -26,6 +26,15 @@
     #add-place-working, #add-place-question, #add-place {
       display: none;
     }
+    #language-chooser {
+      text-align: right;
+      width: 100%;
+      margin-bottom: 0;
+    }
+    #language-chooser img {
+      margin: 0 0 0 1em;
+      box-shadow: 2px 2px 5px #aaaaaa;
+    }
   </style>
 
   <script src="https://maps.google.com/maps/api/js?sensor=false&amp;v=3"></script>
@@ -243,6 +252,10 @@
         Můžeme nabídnout vlastní zážitky z&nbsp;místa.
       </p>
       <p data-i18n="legend.addYourself"></p>
+      <p id="language-chooser">
+        <a href="?setLng=cs-CZ"><img src="cs-CZ.png" title="Česky" alt="Česky"/></a>
+        <a href="?setLng=en-US"><img src="en-US.png" title="English" alt="English"/></a>
+      </p>
     </div>
     <input id="googft-legend-close" style="display:none" type="button" value="Schovat" />
   </div>
